@@ -166,4 +166,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**Note**: This project is part of an AI Engineering learning initiative focused on building production-ready document processing systems.
+**Note**: This project is part of an AI Engineering learning initiative focused on building production-ready document processing systems. README.md has been AI generated, the rest of the code is mine.
