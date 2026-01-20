@@ -4,11 +4,12 @@ from pathlib import Path
 import pymupdf
 
 from src.config import ROOT_DIR, OUTPUT_DIR
+from typing import Dict, Any
 
 class Ingestor:
     """Class for ingesting and processing Invoices."""
 
-    def ingest(self, file_path: str):
+    def ingest(self, state_dict : Dict[str, Any]):
         """Ingest and process the document.
         
         Args:
@@ -18,7 +19,7 @@ class Ingestor:
             Extracted text from the document
         """
 
-        file_path = Path(file_path)
+        file_path = Path(state_dict["pdf_file"])
         pdf_name = file_path.stem # For later caching alredy ingested files.
         print(f"pdf name is {pdf_name}")
 
@@ -45,9 +46,11 @@ class Ingestor:
                 for page in doc:
                     text = page.get_text()
                     out.write(text)
+
             print(f"Extracted text saved to {output_file}")
         
-        return str(output_file)
+        state_dict["text_file"] = str(output_file)
+        return state_dict
             
 
             

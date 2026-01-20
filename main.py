@@ -23,5 +23,6 @@ if __name__ == "__main__":
 
 
     pipeline = Pipeline()
-    invoice = pipeline.process_document(str(pdf_path))
-    print(invoice.model_dump())
+    invoice_state = pipeline.process_document(str(pdf_path))
+    print(invoice_state["invoice_model"].model_dump())
+    print(invoice_state)
