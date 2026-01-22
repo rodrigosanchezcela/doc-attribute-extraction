@@ -29,6 +29,7 @@ class Config:
                                    - return null for missing values.
                                    - return "Not sure" for uncertain values."""
                                    )
+        self.supported_files = ["pdf", "jpeg", "jpg", "png"]
     
 def get_config() -> Config:
     """Function to get the configuration settings."""

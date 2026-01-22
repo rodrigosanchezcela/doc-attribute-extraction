@@ -16,7 +16,7 @@ class Pipeline:
         self.ingestor = Ingestor()
         self.extractor = InvoiceExtractionAgent()
 
-    def process_document(self, pdf_path: str):
+    async def process_document(self, pdf_path: str):
         """Process the document from ingestion to structured attribute extraction.
         
         Args:
@@ -25,18 +25,25 @@ class Pipeline:
         if not pdf_path:
             raise ValueError("PDF path must be provided.")
         
-        state : Dict[str, Any]  = {"pdf_file": None,
-                                        "text_file": None,
-                                        "invoice_model": None,
-                                        "run_usage": RunUsage} #track state for debugging
+        state : Dict[str, Any]  = {"pdf_path": None,
+                                    "text_file": None,
+                                    "model": None,
+                                    "model_name": None,
+                                    "invoice_model": None,
+                                    "input_tokens": int,
+                                    "output_tokens": int,
+                                    "requests": int,
+                                    "timings": {},
+                                    "cache_hit": False,
+                                    }
         
-        state["pdf_file"] = pdf_path
+        state["pdf_path"] = pdf_path
         ingest_runnable = RunnableLambda(self.ingestor.ingest) # ingest function returns str
-        extract_runnable = RunnableLambda(self.extractor.extract_attributes)
+        extract_runnable = RunnableLambda(self.extractor.extract_attributes_async)
 
         pipeline = ingest_runnable | extract_runnable
 
-        result = pipeline.invoke(state)
+        result = await pipeline.ainvoke(state)
         return result
 
 
