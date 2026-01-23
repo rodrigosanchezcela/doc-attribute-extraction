@@ -12,6 +12,7 @@ dependencies = [
     "pdfplumber>=0.11.9",
     "pillow>=12.1.0",
     "pydantic-ai>=1.43.0",
+    "pydantic-ai-slim[openai]>=1.43.0",
     "pymupdf>=1.26.7",
     "pytesseract>=0.3.13",
     "python-dotenv>=1.2.1",
