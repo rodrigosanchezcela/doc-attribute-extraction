@@ -15,6 +15,8 @@ OUTPUT_DIR = ROOT_DIR / "outputs"
 ## Environment Variables
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4o-mini")
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "openrouter:anthropic/claude-3.5-sonnet")
+OPENROUTER_KEY = os.getenv("OPENROUTER_API_KEY")
 
 class Config:
     """Configuration class for holding project settings."""

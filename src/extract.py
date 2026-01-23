@@ -1,6 +1,8 @@
 import time
 from pydantic_ai import Agent
-from src.config import  MODEL_NAME, get_config, OUTPUT_DIR
+from pydantic_ai.models.openrouter import OpenRouterModel
+from pydantic_ai.models.openai import OpenAIChatModel
+from src.config import  MODEL_NAME, get_config, OUTPUT_DIR 
 from src.schema import InvoiceModel
 from pathlib import Path
 from typing import Dict, Any
@@ -14,7 +16,7 @@ class InvoiceExtractionAgent:
     def __init__(self):
 
         self.agent = Agent(
-            model=str(MODEL_NAME),
+            model=MODEL_NAME,
             output_type=InvoiceModel,
             system_prompt=cfg.system_prompt,
         )
